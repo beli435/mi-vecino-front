@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -10,19 +12,30 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
   imports: [CommonModule, CurrencyPipe], // 👈 IMPORTANTE
 })
 export class ProductListComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private productService: ProductService) {}
 
   ngOnInit() {
     this.loadProducts();
   }
 
   loadProducts() {
-    this.products = JSON.parse(localStorage.getItem('products') || '[]');
+    this.products = this.productService.getAll();
   }
 
   nuevoProducto() {
     this.router.navigate(['/products/new']);
+  }
+
+  editarProducto(id: string) {
+    this.router.navigate(['/products', id, 'edit']);
+  }
+
+  eliminarProducto(id: string) {
+    if (confirm('¿Eliminar este producto?')) {
+      this.productService.delete(id);
+      this.loadProducts();
+    }
   }
 }

@@ -10,5 +10,21 @@
   },
   "include": [
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/app/app.module.ts",
+    "src/app/app-routing.module.ts",
+    "src/app/products/products-module.ts",
+    "src/app/products/products-routing.module.ts",
+    "src/app/sales/sales-module.ts",
+    "src/app/sales/sales-routing-module.ts",
+    "src/app/auth/login/login.ts",
+    "src/app/auth/login/login.spec.ts",
+    "src/app/products/product-list/product-list.ts",
+    "src/app/products/product-list/product-list.spec.ts",
+    "src/app/products/product-form/product-form.ts",
+    "src/app/products/product-form/product-form.spec.ts",
+    "src/app/products/low-stock/**",
+    "src/app/sales/sale-form/**"
   ]
 }
